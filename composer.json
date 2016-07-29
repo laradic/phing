@@ -1,0 +1,22 @@
+{
+    "name": "laradic/phing",
+    "description": "sebwite/phing is a laravel package",
+    "keywords": ["laradic", "testing", "laravel"],
+    "license": "MIT",
+    "authors": [
+        {"name": "Robin Radic", "homepage": "https://github.com/robinradic", "email": "robin@radic.nl", "role": "Developer"}
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "classmap": [
+            "src"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
