@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpdox xmlns="http://xml.phpdox.net/config">
 
-    <project name="Sebwite" source="../src" workdir="phpdox">
+    <project name="Laradic" source="../src" workdir="phpdox">
 
         <collector publiconly="false">
             <include mask="*.php"/>

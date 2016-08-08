@@ -6,7 +6,7 @@
         ...
     -->
     <property name="jenkins.has-tests" value="true"/>
-    <property name="sebwite.phing.dir" value="${project.basedir}/vendor/sebwite/phing"/>
+    <property name="laradic.phing.dir" value="${project.basedir}/vendor/laradic/phing"/>
 
     <target name="build" depends="clean,prepare,lint,phploc-ci,pdepend,phpcs-ci,phpcpd-ci,phpunit,phpdox,phpdoc" description=""/>
 
@@ -119,7 +119,7 @@
     <target name="phpdox" depends="phploc-ci,phpcs-ci,phpmd-ci" description="Generate project documentation using phpDox">
         <exec executable="${tools.dir}phpdox${tools.ext}" dir="${project.basedir}/build" logoutput="true">
             <arg value="--file"/>
-            <arg path="${sebwite.phing.dir}/tool-config/phpdox.xml"/>
+            <arg path="${laradic.phing.dir}/tool-config/phpdox.xml"/>
         </exec>
     </target>
 
@@ -147,7 +147,7 @@
         <exec executable="${tools.dir}phpmd${tools.ext}" logoutput="true">
             <arg path="${project.basedir}/src"/>
             <arg value="xml"/>
-            <arg path="${sebwite.phing.dir}/tool-config/phpmd.xml"/>
+            <arg path="${laradic.phing.dir}/tool-config/phpmd.xml"/>
             <arg value="--reportfile"/>
             <arg path="${project.basedir}/build/logs/pmd.xml"/>
         </exec>
@@ -157,14 +157,14 @@
         <exec executable="${tools.dir}phpmd${tools.ext}" logoutput="true">
             <arg path="${project.basedir}/src"/>
             <arg value="text"/>
-            <arg path="${sebwite.phing.dir}/tool-config/phpmd.xml"/>
+            <arg path="${laradic.phing.dir}/tool-config/phpmd.xml"/>
         </exec>
     </target>
 
     <target name="phpunit" depends="prepare" description="Run unit tests with PHPUnit">
         <exec executable="${tools.dir}phpunit${tools.ext}" logoutput="true">
             <arg value="--configuration"/>
-            <arg path="${sebwite.phing.dir}/tool-config/phpunit.xml"/>
+            <arg path="${laradic.phing.dir}/tool-config/phpunit.xml"/>
             <arg value="--bootstrap"/>
             <arg path="${vendor.dir}/autoload.php"/>
         </exec>
