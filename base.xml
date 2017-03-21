@@ -11,26 +11,36 @@
 
 <!--suppress PhingDomInspection -->
 <project>
+    <!--Use "phing -Dtravis=true" to enable travis -->
     <property name="travis" value="false"/>
     <property name="logoutput" value="true"/>
     <property name="passthru" value="true"/>
     <property name="paths.php_cs" value="${project.basedir}/.php_cs"/>
     <property name="paths.phpdoc-xml" value="${project.basedir}/docs/structure.xml"/>
+    <property name="paths.vendor" value="${project.basedir}/vendor"/>
+    <!--Use "phing -Dpaths.bin=/usr/local/bin" to use phar binaries (if installed there)-->
+    <property name="paths.bin" value="${paths.vendor}/bin"/>
 
+    <!--If working in a travis env, we'll use the package its vendor  -->
     <if>
         <istrue value="${travis}"/>
         <then>
-            <property name="paths.vendor" value="${project.basedir}/vendor"/>
-            <property name="paths.bin" value="${project.basedir}/vendor/bin"/>
+            <property name="paths.vendor" value="${project.basedir}/vendor" override="true"/>
+            <property name="paths.bin" value="${paths.vendor}/bin" override="true"/>
         </then>
-        <else>
-            <property name="paths.vendor" value="${project.basedir}/../../../vendor"/>
-            <property name="paths.bin" value="/usr/local/bin"/>
-        </else>
     </if>
 
-    <property name="laradic.phing.dir" value="${project.basedir}/vendor/laradic/phing"/>
+    <!--If working in a workbench setup, we'll use the project's vendor-->
+    <exec command="if [ -d '${project.basedir}/../../../vendor' ]; then echo 'true'; else echo 'false'; fi;" outputProperty="output.IS_DIRECTORY_EXISTS"/>
+    <if>
+        <equals arg1="${output.IS_DIRECTORY_EXISTS}" arg2="true"/>
+        <then>
+            <property name="paths.vendor" value="${project.basedir}/../../../vendor"/>
+            <property name="paths.bin" value="${paths.vendor}/bin"/>
+        </then>
+    </if>
 
+    <property name="laradic.phing.dir" value="${phing.dir}"/>
 
 
 </project>
